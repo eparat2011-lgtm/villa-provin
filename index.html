@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Villa Provin · Luxury Holiday Villa · Côte d'Azur</title>
+  <meta name="description" content="Luxury holiday villa in Vence, Côte d'Azur. 5 bedrooms, heated saltwater pool, 180° sea view. Above Matisse Chapel. Book your dream retreat." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #333333;
+      background: #ffffff;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== COLOR VARS ===== */
+    :root {
+      --dark: #1a1a2e;
+      --gold: #c9a96e;
+      --gold-light: #dbb988;
+      --white: #ffffff;
+      --grey: #f8f8f6;
+      --text: #333333;
+      --text-light: #666666;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: transparent;
+      transition: background 0.4s ease, padding 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 0.85rem 2.5rem;
+      box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-lang {
+      display: flex;
+      gap: 0.5rem;
+      margin-left: 1rem;
+      padding-left: 1rem;
+      border-left: 1px solid rgba(255,255,255,0.2);
+    }
+    .nav-lang a {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      transition: color 0.3s;
+    }
+    .nav-lang a:hover, .nav-lang a.active { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--dark) !important;
+      padding: 0.6rem 1.3rem;
+      border-radius: 2px;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em;
+      transition: background 0.3s !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('../backup_original/img/villaprovin/010-view/view-1.jpg');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    #hero:hover .hero-bg { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(26, 26, 46, 0.75) 0%,
+        rgba(10, 10, 25, 0.55) 50%,
+        rgba(26, 26, 46, 0.8) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--white);
+      padding: 0 1.5rem;
+      max-width: 900px;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.3s forwards;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.7s forwards;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1.1rem 3rem;
+      border: 2px solid var(--gold);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.9s forwards;
+    }
+    .hero-cta:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeIn 1s ease 1.5s both;
+    }
+    .scroll-arrow {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    /* ===== INTRO ===== */
+    #intro {
+      background: var(--white);
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+    .intro-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+    }
+    .pillar-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .pillar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+    .pillar-sub {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+    .intro-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--dark);
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.7;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(201, 169, 110, 0.3);
+    }
+    .gold-line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 2rem auto;
+    }
+
+    /* ===== GALLERY ===== */
+    #gallery {
+      background: var(--dark);
+      padding: 6rem 2rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .section-title.light { color: var(--white); }
+    .section-title.dark { color: var(--dark); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+    }
+    .gallery-item:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,26,46,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-label {
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ===== LIGHTBOX ===== */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 0 80px rgba(0,0,0,0.8);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 1rem;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      user-select: none;
+    }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
+
+    /* ===== EXPERIENCE ===== */
+    #experience {
+      background: var(--white);
+      padding: 6rem 2rem;
+    }
+    .experience-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 1300px;
+      margin: 0 auto 2px;
+      min-height: 560px;
+    }
+    .experience-block:last-child { margin-bottom: 0; }
+    .experience-image {
+      overflow: hidden;
+    }
+    .experience-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .experience-block:hover .experience-image img { transform: scale(1.04); }
+    .experience-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 5rem;
+      background: var(--grey);
+    }
+    .experience-block.reverse .experience-image { order: 2; }
+    .experience-block.reverse .experience-text { order: 1; background: var(--dark); color: var(--white); }
+    .experience-block.reverse .exp-title { color: var(--white); }
+    .exp-number {
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(201,169,110,0.15);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+      margin-bottom: -1rem;
+    }
+    .exp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+    .exp-text {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text-light);
+      max-width: 420px;
+    }
+    .experience-block.reverse .exp-text { color: rgba(255,255,255,0.7); }
+
+    /* ===== FEATURES ===== */
+    #features {
+      background: var(--grey);
+      padding: 6rem 2rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: 900px;
+      margin: 3rem auto 0;
+    }
+    .feature-card {
+      background: var(--white);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      border-left: 3px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover {
+      border-left-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .feature-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .feature-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ===== VENCE / LOCATION ===== */
+    #location {
+      position: relative;
+      padding: 6rem 2rem;
+      overflow: hidden;
+    }
+    .location-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('../backup_original/img/vence/Vence-001.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.35);
+    }
+    .location-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .location-text { color: var(--white); }
+    .location-text .section-eyebrow { margin-bottom: 1rem; }
+    .location-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    .location-desc {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2rem;
+    }
+    .location-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .location-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+    .location-detail::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .map-container {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      height: 400px;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ===== BOOKING CTA ===== */
+    #booking {
+      background: var(--white);
+      padding: 8rem 2rem;
+      text-align: center;
+    }
+    .booking-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+    .booking-sub {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+    .booking-cta {
+      display: inline-block;
+      background: var(--dark);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1.2rem 3.5rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      border: 2px solid var(--dark);
+    }
+    .booking-cta:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--dark);
+    }
+    .booking-note {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      padding: 3rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .instagram-icon {
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s;
+    }
+    .instagram-icon:hover { color: var(--gold); }
+    .instagram-icon svg { width: 20px; height: 20px; fill: currentColor; }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.5; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
+      .experience-text { padding: 3rem; }
+      .location-content { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav.scrolled { padding: 0.75rem 1.5rem; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(26,26,46,0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        font-size: 1.2rem;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1rem; }
+      .nav-toggle { display: flex; z-index: 1001; }
+      .nav-lang { border-left: none; padding-left: 0; margin-left: 0; }
+
+      .intro-pillars { grid-template-columns: 1fr; gap: 2rem; }
+
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+      .gallery-item:first-child { grid-column: span 2; }
+
+      .experience-block {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .experience-block.reverse .experience-image { order: 0; }
+      .experience-block.reverse .experience-text { order: 1; }
+      .experience-text { padding: 2.5rem 1.5rem; }
+      .experience-image { height: 280px; }
+      .exp-text { max-width: none; }
+
+      .features-grid { grid-template-columns: 1fr; }
+
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; }
+      .booking-cta { padding: 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Villa <span>Provin</span></a>
+  <div class="nav-toggle" id="navToggle" aria-label="Menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#location">Vence</a></li>
+    <li><a href="mailto:info@villaprovin.com?subject=Booking%20Enquiry%20Villa%20Provin" class="nav-cta">Book Now</a></li>
+    <li class="nav-lang">
+      <a href="#" class="active">EN</a>
+      <a href="#">DE</a>
+      <a href="#">FR</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Côte d'Azur · France</p>
+    <h1 class="hero-title">Your Dream Retreat<br>on the Côte d'Azur</h1>
+    <p class="hero-subtitle">Above Matisse Chapel · Vence · South of France</p>
+    <a href="mailto:info@villaprovin.com?subject=Booking%20Enquiry%20Villa%20Provin" class="hero-cta">Check Availability</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="intro-pillars">
+    <div class="pillar reveal">
+      <div class="pillar-icon">🌊</div>
+      <div class="pillar-title">180° Sea View</div>
+      <div class="pillar-sub">Wake up to the Mediterranean glittering at your feet</div>
+    </div>
+    <div class="pillar reveal reveal-delay-1">
+      <div class="pillar-icon">🏊</div>
+      <div class="pillar-title">Heated Saltwater Pool</div>
+      <div class="pillar-sub">Crystal-clear water, warm even in spring and autumn</div>
+    </div>
+    <div class="pillar reveal reveal-delay-2">
+      <div class="pillar-icon">🏡</div>
+      <div class="pillar-title">280 sqm · 5 Bedrooms · 10 Guests</div>
+      <div class="pillar-sub">Spacious luxury for families and friends</div>
+    </div>
+  </div>
+  <div class="gold-line reveal"></div>
+  <p class="intro-tagline reveal">"In 2022 we fulfilled our dream of a home on the Côte d'Azur — and now we invite you to share it."</p>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">The Villa</p>
+    <h2 class="section-title light">A Glimpse of Paradise</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal" data-label="Infinity View" data-src="../backup_original/img/villaprovin/010-view/view-1.jpg">
+      <img src="../backup_original/img/villaprovin/010-view/view-1.jpg" alt="180° Mediterranean View" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">180° Mediterranean View</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1" data-label="Pool" data-src="../backup_original/img/villaprovin/011-pool/pool-1.jpg">
+      <img src="../backup_original/img/villaprovin/011-pool/pool-1.jpg" alt="Heated Saltwater Pool" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Heated Saltwater Pool</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2" data-label="Villa" data-src="../backup_original/img/villaprovin/012-villa/villa-1.jpg">
+      <img src="../backup_original/img/villaprovin/012-villa/villa-1.jpg" alt="Villa Provin Exterior" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Villa Exterior</span></div>
+    </div>
+    <div class="gallery-item reveal" data-label="Pool Terrace" data-src="../backup_original/img/villaprovin/011-pool/pool-3.jpg">
+      <img src="../backup_original/img/villaprovin/011-pool/pool-3.jpg" alt="Pool Terrace" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Pool Terrace</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1" data-label="Sea View 2" data-src="../backup_original/img/villaprovin/010-view/view-2.jpg">
+      <img src="../backup_original/img/villaprovin/010-view/view-2.jpg" alt="Sea View" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Sea View</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2" data-label="Kitchen" data-src="../backup_original/img/villaprovin/002-kitchen/kitchen-1.jpg">
+      <img src="../backup_original/img/villaprovin/002-kitchen/kitchen-1.jpg" alt="Gourmet Kitchen" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Gourmet Kitchen</span></div>
+    </div>
+    <div class="gallery-item reveal" data-label="Master Suite" data-src="../backup_original/img/villaprovin/001-master1/master1-1.jpg">
+      <img src="../backup_original/img/villaprovin/001-master1/master1-1.jpg" alt="Master Suite" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Master Suite</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1" data-label="Pool Sunset" data-src="../backup_original/img/villaprovin/011-pool/pool-5.jpg">
+      <img src="../backup_original/img/villaprovin/011-pool/pool-5.jpg" alt="Pool at Sunset" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Pool at Sunset</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2" data-label="BBQ" data-src="../backup_original/img/villaprovin/013-barbecue/barbecue-1.jpg">
+      <img src="../backup_original/img/villaprovin/013-barbecue/barbecue-1.jpg" alt="OFYR BBQ" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">OFYR Wood-Fired BBQ</span></div>
+    </div>
+    <div class="gallery-item reveal" data-label="Villa Garden" data-src="../backup_original/img/villaprovin/012-villa/villa-3.jpg">
+      <img src="../backup_original/img/villaprovin/012-villa/villa-3.jpg" alt="Villa Garden" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Villa Garden</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1" data-label="Pool Evening" data-src="../backup_original/img/villaprovin/011-pool/pool-8.jpg">
+      <img src="../backup_original/img/villaprovin/011-pool/pool-8.jpg" alt="Pool Evening" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-label">Pool · Evening</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <span class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</span>
+  <span class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8592;</span>
+  <img id="lightboxImg" src="" alt="Villa Provin" />
+  <span class="lightbox-next" id="lightboxNext" aria-label="Next">&#8594;</span>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal" style="padding: 0 2rem 3rem;">
+    <p class="section-eyebrow">The Experience</p>
+    <h2 class="section-title dark">Where Memories Are Made</h2>
+  </div>
+
+  <div class="experience-block reveal">
+    <div class="experience-image">
+      <img src="../backup_original/img/villaprovin/011-pool/pool-6.jpg" alt="Private Pool" loading="lazy" />
+    </div>
+    <div class="experience-text">
+      <div class="exp-number">01</div>
+      <h3 class="exp-title">The Pool · Your Private Oasis</h3>
+      <p class="exp-text">Dive into crystal-clear saltwater. Watch the sun set over the Mediterranean while the kids splash in the pool. Our heated pool is the heart of Villa Provin — the place where memories are made.</p>
+    </div>
+  </div>
+
+  <div class="experience-block reverse reveal">
+    <div class="experience-image">
+      <img src="../backup_original/img/villaprovin/010-view/view-3.jpg" alt="Mediterranean View" loading="lazy" />
+    </div>
+    <div class="experience-text">
+      <div class="exp-number" style="color: rgba(201,169,110,0.25);">02</div>
+      <h3 class="exp-title">The View · 180° Mediterranean</h3>
+      <p class="exp-text">Every morning begins the same way: coffee on the terrace, the Mediterranean glittering below, the hills of Provence stretching to the horizon. There is no better alarm clock.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Everything Included</p>
+    <h2 class="section-title dark">Villa Features</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🛏️</span>
+      <span class="feature-text">5 Bedrooms · sleeps up to 10 guests</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <span class="feature-icon">🚗</span>
+      <span class="feature-text">25 min to Nice Airport</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🏖️</span>
+      <span class="feature-text">25 min to the beach</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <span class="feature-icon">🎨</span>
+      <span class="feature-text">Walk to Matisse Chapel</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🚴</span>
+      <span class="feature-text">Peloton Bike+ &amp; fitness coach</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <span class="feature-icon">🎵</span>
+      <span class="feature-text">Sonos sound system throughout</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🍖</span>
+      <span class="feature-text">OFYR Barbecue (wood-fired)</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <span class="feature-icon">❄️</span>
+      <span class="feature-text">Air conditioning &amp; central heating</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎾</span>
+      <span class="feature-text">Boules court</span>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <span class="feature-icon">👶</span>
+      <span class="feature-text">Baby equipment available</span>
+    </div>
+  </div>
+</section>
+
+<!-- VENCE / LOCATION -->
+<section id="location">
+  <div class="location-bg"></div>
+  <div class="location-content">
+    <div class="location-text reveal">
+      <p class="section-eyebrow">The Village</p>
+      <h2 class="location-title">Discover Vence</h2>
+      <p class="location-desc">
+        Perched high above the Côte d'Azur, Vence is one of the most enchanting medieval hill towns in all of France. Wander the cobbled alleyways of the old town, discover the legendary Matisse Chapel just minutes from the villa, and lose yourself in the scent of lavender and orange blossom at the weekly market.
+      </p>
+      <p class="location-desc">
+        World-class restaurants, authentic Provençal bistros, galleries, and boutiques — Vence offers the perfect blend of tranquillity and culture. And Nice, Cannes, Monaco, and the beaches of the Riviera are all within easy reach.
+      </p>
+      <div class="location-details">
+        <div class="location-detail">Weekly market in the old town square</div>
+        <div class="location-detail">Matisse Chapel — a masterpiece of 20th century art</div>
+        <div class="location-detail">30 min to Monaco &amp; Cannes</div>
+        <div class="location-detail">25 min to Nice Côte d'Azur Airport</div>
+        <div class="location-detail">Fine dining &amp; authentic Provençal cuisine nearby</div>
+      </div>
+    </div>
+    <div class="map-container reveal reveal-delay-1">
+      <iframe
+        title="Vence, Côte d'Azur Map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11553.98!2d7.1059!3d43.7229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cdd76f4e3c5d85%3A0x40819a5fd975800!2sVence%2C%20France!5e0!3m2!1sen!2sde!4v1709000000000!5m2!1sen!2sde"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING CTA -->
+<section id="booking">
+  <div class="gold-line reveal"></div>
+  <h2 class="booking-title reveal">Ready for Your<br>Côte d'Azur Dream?</h2>
+  <p class="booking-sub reveal">Enquiries via email — personal, direct, no booking fees</p>
+  <a href="mailto:info@villaprovin.com?subject=Booking%20Enquiry%20Villa%20Provin" class="booking-cta reveal">Request Availability</a>
+  <p class="booking-note reveal">Managed by Stefan on-site · Fast response guaranteed</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Villa <span>Provin</span></div>
+    <div class="footer-links">
+      <a href="#">Imprint</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="footer-right">
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="instagram-icon" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+      <span class="footer-copy">© 2026 Villa Provin</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ===== NAV SCROLL =====
+  const navbar = document.getElementById('navbar');
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  // Close mobile nav on link click
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ===== SCROLL REVEAL =====
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // ===== LIGHTBOX =====
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  let currentIndex = 0;
+  const images = Array.from(galleryItems).map(item => ({
+    src: item.dataset.src,
+    label: item.dataset.label
+  }));
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = images[index].src;
+    lightboxImg.alt = images[index].label;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function navigate(dir) {
+    currentIndex = (currentIndex + dir + images.length) % images.length;
+    lightboxImg.style.opacity = '0';
+    setTimeout(() => {
+      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.style.opacity = '1';
+    }, 150);
+  }
+
+  lightboxImg.style.transition = 'opacity 0.15s ease';
+
+  galleryItems.forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(i));
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', () => navigate(-1));
+  lightboxNext.addEventListener('click', () => navigate(1));
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
+</script>
+
+</body>
+</html>
