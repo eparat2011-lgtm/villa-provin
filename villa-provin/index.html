@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Villa Provin — Luxury Retreat in Provence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c8a96e;--teal:#2d9cad;--teal-dark:#1a6b7c;--sand:#f5efe6;--terra:#c0714f;--dark:#1a1a1a;--mid:#555;--light:#f9f6f1}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:#fff}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;transition:.3s;background:rgba(0,0,0,.2)}
+nav.scrolled{background:rgba(255,255,255,.97);box-shadow:0 2px 20px rgba(0,0,0,.1)}
+nav.scrolled .logo{color:var(--dark)}
+nav.scrolled .nav-links a{color:var(--mid)}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;text-decoration:none;letter-spacing:.05em}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.9);text-decoration:none;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;transition:.2s}
+.nav-links a:hover{color:var(--gold)}
+.lang-switcher{display:flex;gap:8px}
+.lang-btn{background:none;border:1px solid rgba(255,255,255,.4);color:rgba(255,255,255,.8);padding:4px 10px;border-radius:20px;cursor:pointer;font-size:.75rem;transition:.2s}
+.lang-btn.active,.lang-btn:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+nav.scrolled .lang-btn{border-color:rgba(0,0,0,.2);color:var(--mid)}
+nav.scrolled .lang-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+#hero{height:100vh;background:linear-gradient(135deg,#0d3540 0%,#1a6b7c 40%,#2d9cad 80%);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px;position:relative}
+.hero-content h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);color:#fff;font-weight:700;line-height:1.1;margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.hero-content p{font-size:clamp(1rem,2vw,1.3rem);color:rgba(255,255,255,.85);margin-bottom:40px;letter-spacing:.05em;font-weight:300}
+.btn-primary{background:var(--gold);color:#fff;padding:16px 44px;border:none;border-radius:2px;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:.3s;font-family:'Inter',sans-serif}
+.btn-primary:hover{background:#b8965a;transform:translateY(-2px);box-shadow:0 8px 25px rgba(200,169,110,.4)}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem;letter-spacing:.1em}
+section{padding:100px 5%}
+.section-label{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:15px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);color:var(--dark);margin-bottom:25px;line-height:1.2}
+.section-text{font-size:1rem;color:var(--mid);line-height:1.9;max-width:700px}
+.divider{width:50px;height:2px;background:var(--gold);margin:20px 0 35px}
+#about{background:var(--light)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto}
+.about-img{height:500px;background:linear-gradient(160deg,#0d3540,#2d9cad);border-radius:2px}
+#villa{background:#fff}
+.villa-inner{max-width:1200px;margin:0 auto}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-top:50px}
+.feature-card{padding:35px;border:1px solid #e8e0d5;border-radius:2px;transition:.3s}
+.feature-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.feature-icon{font-size:2rem;margin-bottom:15px}
+.feature-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:10px}
+.feature-card p{color:var(--mid);font-size:.9rem;line-height:1.7}
+#gallery{background:var(--sand)}
+.gallery-inner{max-width:1200px;margin:0 auto}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px}
+.gallery-item{aspect-ratio:1;border-radius:2px;overflow:hidden;cursor:pointer;transition:.4s}
+.gallery-item:nth-child(1){grid-column:span 2;aspect-ratio:2/1}
+.gallery-item:nth-child(5){grid-column:span 2;aspect-ratio:2/1}
+.gallery-item:hover{transform:scale(.98);opacity:.85}
+#pricing{background:#fff}
+.pricing-inner{max-width:1100px;margin:0 auto}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;margin-top:50px}
+.price-card{padding:45px 35px;border:1px solid #e8e0d5;text-align:center;border-radius:2px;position:relative;transition:.3s}
+.price-card.featured{border-color:var(--gold);background:var(--light)}
+.price-card.featured::before{content:'PEAK';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;padding:4px 18px;font-size:.7rem;letter-spacing:.15em;border-radius:20px}
+.price-season{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.price-amount{font-family:'Playfair Display',serif;font-size:2.8rem;color:var(--dark);margin:15px 0 5px}
+.price-per{font-size:.85rem;color:var(--mid)}
+.price-dates{font-size:.8rem;color:var(--mid);margin-top:15px;padding-top:15px;border-top:1px solid #e8e0d5}
+#location{background:var(--light)}
+.location-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.location-facts{display:grid;gap:20px;margin-top:30px}
+.location-fact{display:flex;gap:15px;align-items:flex-start}
+.fact-icon{font-size:1.4rem;flex-shrink:0}
+.fact-text h4{font-size:.9rem;font-weight:600;margin-bottom:3px}
+.fact-text p{font-size:.85rem;color:var(--mid)}
+.loc-map{height:400px;background:linear-gradient(160deg,#2d5a3d,#4a8c5c);border-radius:2px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:1.1rem}
+#booking{background:linear-gradient(135deg,#0d3540,#1a6b7c 60%,#2d9cad)}
+.booking-inner{max-width:800px;margin:0 auto;text-align:center}
+.booking-inner .section-label{color:rgba(255,255,255,.6)}
+.booking-inner .section-title{color:#fff}
+.booking-inner .section-text{color:rgba(255,255,255,.75);margin:0 auto 50px}
+form{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);padding:50px;border-radius:4px;border:1px solid rgba(255,255,255,.15)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.form-group{display:flex;flex-direction:column;gap:8px;text-align:left}
+.form-group label{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:14px;border-radius:2px;font-size:.95rem;font-family:'Inter',sans-serif;transition:.2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--gold)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.4)}
+.form-group select option{background:#1a6b7c;color:#fff}
+.form-group textarea{resize:vertical;min-height:120px}
+.form-full{grid-column:span 2}
+footer{background:var(--dark);color:rgba(255,255,255,.6);padding:50px 5%;text-align:center}
+footer .logo{color:var(--gold);display:block;margin-bottom:15px;font-size:1.8rem;font-family:'Playfair Display',serif;text-decoration:none}
+footer a{color:var(--gold);text-decoration:none}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .about-grid,.location-inner{grid-template-columns:1fr;gap:40px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item:nth-child(1),.gallery-item:nth-child(5){grid-column:span 2}
+  .pricing-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .form-full{grid-column:span 1}
+  form{padding:30px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="logo">Villa Provin</a>
+  <div class="nav-links">
+    <a href="#about" data-i18n="nav_about">Die Villa</a>
+    <a href="#gallery" data-i18n="nav_gallery">Galerie</a>
+    <a href="#pricing" data-i18n="nav_pricing">Preise</a>
+    <a href="#booking" data-i18n="nav_book">Anfragen</a>
+  </div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('it')">IT</button>
+    <button class="lang-btn" onclick="setLang('dk')">DK</button>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-content">
+    <h1 data-i18n="hero_title">Villa Provin</h1>
+    <p data-i18n="hero_sub">Ihr privates Luxus-Refugium in der Provence</p>
+    <a href="#booking" class="btn-primary" data-i18n="hero_cta">Jetzt anfragen</a>
+  </div>
+  <div class="scroll-hint">↓ scroll</div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <p class="section-label" data-i18n="about_label">Willkommen</p>
+      <h2 class="section-title" data-i18n="about_title">Ein Ort, der nicht vergessen wird</h2>
+      <div class="divider"></div>
+      <p class="section-text" data-i18n="about_text">Inmitten der provenzalischen Hügel, mit atemberaubendem Blick über die Dächer eines mittelalterlichen Dorfes bis hin zum Mittelmeer — Villa Provin ist ein außergewöhnliches Anwesen für unvergessliche Momente.</p>
+      <br>
+      <p class="section-text" data-i18n="about_text2">5 Doppelzimmer, ein privater Infinity-Pool, ein Kinoraum und großzügige Außenbereiche machen die Villa zum perfekten Rückzugsort für Familien und Freundesgruppen.</p>
+    </div>
+    <div class="about-img"></div>
+  </div>
+</section>
+
+<section id="villa">
+  <div class="villa-inner">
+    <p class="section-label" data-i18n="villa_label">Ausstattung</p>
+    <h2 class="section-title" data-i18n="villa_title">Die Villa</h2>
+    <div class="divider"></div>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🛏️</div><h3 data-i18n="feat1_t">5 Doppelzimmer</h3><p data-i18n="feat1_p">Alle Zimmer klimatisiert, mit Bad oder Dusche. Schläft bis zu 11 Personen.</p></div>
+      <div class="feature-card"><div class="feature-icon">🏊</div><h3 data-i18n="feat2_t">Infinity Pool</h3><p data-i18n="feat2_p">Privater beheizter Pool mit Panoramablick über die Provence und das Mittelmeer.</p></div>
+      <div class="feature-card"><div class="feature-icon">🎬</div><h3 data-i18n="feat3_t">Kinoraum</h3><p data-i18n="feat3_p">Großer Kinoraum mit Loungesofa — perfekt für entspannte Abende.</p></div>
+      <div class="feature-card"><div class="feature-icon">🌅</div><h3 data-i18n="feat4_t">Panoramablick</h3><p data-i18n="feat4_p">Atemberaubende Aussicht auf provenzalisches Dorf und das Mittelmeer.</p></div>
+      <div class="feature-card"><div class="feature-icon">🍽️</div><h3 data-i18n="feat5_t">Terrasse &amp; Lounge</h3><p data-i18n="feat5_p">Großzügige Außenterrassen, überdachte Lounge, Grill und Outdoor-Dining.</p></div>
+      <div class="feature-card"><div class="feature-icon">📍</div><h3 data-i18n="feat6_t">Top-Lage</h3><p data-i18n="feat6_p">20 Min zur Côte d'Azur, nahe Vence, Saint-Paul-de-Vence und Antibes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="gallery-inner">
+    <p class="section-label" data-i18n="gal_label">Impressionen</p>
+    <h2 class="section-title" data-i18n="gal_title">Die Villa erleben</h2>
+    <div class="divider"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item" style="background:linear-gradient(135deg,#0d3540,#2d9cad)"></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#1a6b7c,#4ab8cc)"></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#c0714f,#e8a080)"></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#2d5a3d,#5aaf6e)"></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#c8a96e,#f0d5a0)"></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#0d3540,#1a6b7c)"></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#2d9cad,#4ab8cc)"></div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#555,#888)"></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="pricing-inner">
+    <p class="section-label" data-i18n="price_label">Preise</p>
+    <h2 class="section-title" data-i18n="price_title">Mietpreise 2026</h2>
+    <div class="divider"></div>
+    <p class="section-text" data-i18n="price_intro">Alle Preise pro Woche inkl. Endreinigung. Mindestmietdauer 7 Nächte.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <p class="price-season" data-i18n="s_low">Nebensaison</p>
+        <div class="price-amount">€3.500</div>
+        <div class="price-per" data-i18n="per_week">pro Woche</div>
+        <div class="price-dates" data-i18n="d_low">April–Mai / Oktober–November</div>
+      </div>
+      <div class="price-card featured">
+        <p class="price-season" data-i18n="s_mid">Hauptsaison</p>
+        <div class="price-amount">€5.500</div>
+        <div class="price-per" data-i18n="per_week">pro Woche</div>
+        <div class="price-dates" data-i18n="d_mid">Juni / September</div>
+      </div>
+      <div class="price-card">
+        <p class="price-season" data-i18n="s_high">Hochsaison</p>
+        <div class="price-amount">€7.500</div>
+        <div class="price-per" data-i18n="per_week">pro Woche</div>
+        <div class="price-dates" data-i18n="d_high">Juli – August</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="location-inner">
+    <div>
+      <p class="section-label" data-i18n="loc_label">Lage</p>
+      <h2 class="section-title" data-i18n="loc_title">Herz der Provence</h2>
+      <div class="divider"></div>
+      <div class="location-facts">
+        <div class="location-fact"><span class="fact-icon">🏖️</span><div class="fact-text"><h4 data-i18n="l1h">Côte d'Azur</h4><p data-i18n="l1p">20 Minuten bis zum Mittelmeer und den Stränden von Antibes</p></div></div>
+        <div class="location-fact"><span class="fact-icon">🎨</span><div class="fact-text"><h4 data-i18n="l2h">Kunst &amp; Kultur</h4><p data-i18n="l2p">Nahe Saint-Paul-de-Vence, Chagall Museum, Fondation Maeght</p></div></div>
+        <div class="location-fact"><span class="fact-icon">✈️</span><div class="fact-text"><h4 data-i18n="l3h">Flughafen Nizza</h4><p data-i18n="l3p">45 Minuten — direkter Anschluss an alle europäischen Städte</p></div></div>
+        <div class="location-fact"><span class="fact-icon">🍷</span><div class="fact-text"><h4 data-i18n="l4h">Gastronomie</h4><p data-i18n="l4p">Märkte, Restaurants und Weingüter direkt vor der Tür</p></div></div>
+      </div>
+    </div>
+    <div class="loc-map" data-i18n="map_txt">📍 Provence, Frankreich</div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="booking-inner">
+    <p class="section-label" data-i18n="bk_label">Kontakt</p>
+    <h2 class="section-title" data-i18n="bk_title">Jetzt anfragen</h2>
+    <p class="section-text" data-i18n="bk_text">Wir melden uns innerhalb von 24 Stunden mit Verfügbarkeit und allen Details.</p>
+    <form onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="form-group"><label data-i18n="f_name">Name</label><input type="text" id="fn" required placeholder="Ihr Name"></div>
+        <div class="form-group"><label data-i18n="f_email">E-Mail</label><input type="email" id="fe" required placeholder="ihre@email.com"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label data-i18n="f_arr">Anreise</label><input type="date" id="fa" required></div>
+        <div class="form-group"><label data-i18n="f_dep">Abreise</label><input type="date" id="fd" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label data-i18n="f_guests">Personen</label><select id="fg"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select></div>
+        <div class="form-group"><label data-i18n="f_src">Wie haben Sie uns gefunden?</label><select id="fs"><option>Google</option><option>Instagram</option><option>Empfehlung</option><option>Buchungsagentur</option><option>Sonstiges</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-full"><label data-i18n="f_msg">Nachricht</label><textarea id="fm" placeholder="Anlass der Reise, besondere Wünsche..."></textarea></div>
+      </div>
+      <button type="submit" class="btn-primary" data-i18n="f_send" style="width:100%;font-size:1rem;padding:18px">Anfrage absenden</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="logo">Villa Provin</a>
+  <p><a href="mailto:stefan@villaprovin.com">stefan@villaprovin.com</a></p>
+  <br>
+  <p style="font-size:.75rem;opacity:.5">© 2026 Villa Provin — Provence, France. All rights reserved.</p>
+</footer>
+
+<script>
+const T={
+de:{nav_about:"Die Villa",nav_gallery:"Galerie",nav_pricing:"Preise",nav_book:"Anfragen",hero_title:"Villa Provin",hero_sub:"Ihr privates Luxus-Refugium in der Provence",hero_cta:"Jetzt anfragen",about_label:"Willkommen",about_title:"Ein Ort, der nicht vergessen wird",about_text:"Inmitten der provenzalischen Hügel, mit atemberaubendem Blick über die Dächer eines mittelalterlichen Dorfes bis hin zum Mittelmeer — Villa Provin ist ein außergewöhnliches Anwesen für unvergessliche Momente.",about_text2:"5 Doppelzimmer, ein privater Infinity-Pool, ein Kinoraum und großzügige Außenbereiche machen die Villa zum perfekten Rückzugsort.",villa_label:"Ausstattung",villa_title:"Die Villa",feat1_t:"5 Doppelzimmer",feat1_p:"Alle Zimmer klimatisiert, mit Bad oder Dusche. Schläft bis zu 11 Personen.",feat2_t:"Infinity Pool",feat2_p:"Privater beheizter Pool mit Panoramablick über die Provence.",feat3_t:"Kinoraum",feat3_p:"Großer Kinoraum mit Loungesofa — perfekt für entspannte Abende.",feat4_t:"Panoramablick",feat4_p:"Atemberaubende Aussicht auf provenzalisches Dorf und das Mittelmeer.",feat5_t:"Terrasse & Lounge",feat5_p:"Großzügige Außenterrassen, überdachte Lounge, Grill und Outdoor-Dining.",feat6_t:"Top-Lage",feat6_p:"20 Min zur Côte d'Azur, nahe Vence und Antibes.",gal_label:"Impressionen",gal_title:"Die Villa erleben",price_label:"Preise",price_title:"Mietpreise 2026",price_intro:"Alle Preise pro Woche inkl. Endreinigung.",s_low:"Nebensaison",s_mid:"Hauptsaison",s_high:"Hochsaison",per_week:"pro Woche",d_low:"April–Mai / Oktober–November",d_mid:"Juni / September",d_high:"Juli – August",loc_label:"Lage",loc_title:"Herz der Provence",l1h:"Côte d'Azur",l1p:"20 Minuten bis zum Mittelmeer",l2h:"Kunst & Kultur",l2p:"Nahe Saint-Paul-de-Vence, Chagall Museum",l3h:"Flughafen Nizza",l3p:"45 Minuten — alle europäischen Städte",l4h:"Gastronomie",l4p:"Märkte, Restaurants und Weingüter",map_txt:"📍 Provence, Frankreich",bk_label:"Kontakt",bk_title:"Jetzt anfragen",bk_text:"Wir melden uns innerhalb von 24 Stunden mit Verfügbarkeit.",f_name:"Name",f_email:"E-Mail",f_arr:"Anreise",f_dep:"Abreise",f_guests:"Personen",f_src:"Wie gefunden?",f_msg:"Nachricht",f_send:"Anfrage absenden"},
+en:{nav_about:"The Villa",nav_gallery:"Gallery",nav_pricing:"Pricing",nav_book:"Book",hero_title:"Villa Provin",hero_sub:"Your Private Luxury Retreat in Provence",hero_cta:"Book Now",about_label:"Welcome",about_title:"A Place You'll Never Forget",about_text:"Nestled in the Provençal hills, with breathtaking views over a medieval village to the Mediterranean — Villa Provin is an extraordinary estate for unforgettable moments.",about_text2:"5 double bedrooms, private infinity pool, cinema room and generous outdoor spaces make this the perfect retreat.",villa_label:"Features",villa_title:"The Villa",feat1_t:"5 Double Bedrooms",feat1_p:"All rooms air-conditioned with private bath. Sleeps up to 11.",feat2_t:"Infinity Pool",feat2_p:"Private heated pool with panoramic views over Provence.",feat3_t:"Cinema Room",feat3_p:"Large cinema room with lounge sofa — perfect for evenings.",feat4_t:"Panoramic Views",feat4_p:"Breathtaking views over village and Mediterranean.",feat5_t:"Terrace & Lounge",feat5_p:"Outdoor terraces, covered lounge, BBQ and outdoor dining.",feat6_t:"Prime Location",feat6_p:"20 min to Côte d'Azur, near Vence and Antibes.",gal_label:"Gallery",gal_title:"Experience the Villa",price_label:"Pricing",price_title:"Rental Rates 2026",price_intro:"All prices per week including final cleaning.",s_low:"Low Season",s_mid:"Mid Season",s_high:"High Season",per_week:"per week",d_low:"April–May / Oct–Nov",d_mid:"June / September",d_high:"July – August",loc_label:"Location",loc_title:"Heart of Provence",l1h:"Côte d'Azur",l1p:"20 minutes to the Mediterranean",l2h:"Art & Culture",l2p:"Near Saint-Paul-de-Vence, Chagall Museum",l3h:"Nice Airport",l3p:"45 minutes — all European cities",l4h:"Gastronomy",l4p:"Markets, restaurants and vineyards",map_txt:"📍 Provence, France",bk_label:"Contact",bk_title:"Request Availability",bk_text:"We respond within 24 hours with availability and details.",f_name:"Name",f_email:"Email",f_arr:"Arrival",f_dep:"Departure",f_guests:"Guests",f_src:"How did you find us?",f_msg:"Message",f_send:"Send Inquiry"},
+fr:{nav_about:"La Villa",nav_gallery:"Galerie",nav_pricing:"Tarifs",nav_book:"Réserver",hero_title:"Villa Provin",hero_sub:"Votre Retraite Luxueuse en Provence",hero_cta:"Réserver",about_label:"Bienvenue",about_title:"Un lieu inoubliable",about_text:"Nichée dans les collines provençales, avec une vue imprenable sur un village médiéval jusqu'à la Méditerranée — Villa Provin est un domaine extraordinaire.",about_text2:"5 chambres doubles, piscine privée, cinéma et espaces extérieurs généreux.",villa_label:"Équipements",villa_title:"La Villa",feat1_t:"5 Chambres Doubles",feat1_p:"Toutes climatisées avec salle de bain. Capacité 11 personnes.",feat2_t:"Piscine Infinity",feat2_p:"Piscine chauffée avec vue panoramique sur la Provence.",feat3_t:"Cinéma",feat3_p:"Grande salle cinéma avec canapé lounge.",feat4_t:"Vue Panoramique",feat4_p:"Vue imprenable sur village et Méditerranée.",feat5_t:"Terrasse & Lounge",feat5_p:"Terrasses, lounge couvert, BBQ et repas en plein air.",feat6_t:"Emplacement Idéal",feat6_p:"20 min Côte d'Azur, près de Vence et Antibes.",gal_label:"Galerie",gal_title:"Découvrez la Villa",price_label:"Tarifs",price_title:"Tarifs 2026",price_intro:"Prix par semaine, ménage final inclus.",s_low:"Basse Saison",s_mid:"Moyenne Saison",s_high:"Haute Saison",per_week:"par semaine",d_low:"Avril–Mai / Oct–Nov",d_mid:"Juin / Septembre",d_high:"Juillet – Août",loc_label:"Localisation",loc_title:"Cœur de Provence",l1h:"Côte d'Azur",l1p:"20 minutes de la Méditerranée",l2h:"Art & Culture",l2p:"Près de Saint-Paul-de-Vence",l3h:"Aéroport Nice",l3p:"45 minutes de toutes les villes",l4h:"Gastronomie",l4p:"Marchés, restaurants et vignobles",map_txt:"📍 Provence, France",bk_label:"Contact",bk_title:"Demande de Disponibilité",bk_text:"Nous répondons dans les 24 heures.",f_name:"Nom",f_email:"Email",f_arr:"Arrivée",f_dep:"Départ",f_guests:"Personnes",f_src:"Comment nous avez-vous trouvés?",f_msg:"Message",f_send:"Envoyer la Demande"},
+it:{nav_about:"La Villa",nav_gallery:"Galleria",nav_pricing:"Prezzi",nav_book:"Prenota",hero_title:"Villa Provin",hero_sub:"Il Tuo Rifugio di Lusso in Provenza",hero_cta:"Prenota Ora",about_label:"Benvenuto",about_title:"Un luogo indimenticabile",about_text:"Immersa nelle colline provenzali, con vista mozzafiato su un borgo medievale fino al Mediterraneo — Villa Provin è una tenuta straordinaria.",about_text2:"5 camere doppie, piscina a sfioro, sala cinema e spazi esterni generosi.",villa_label:"Dotazioni",villa_title:"La Villa",feat1_t:"5 Camere Doppie",feat1_p:"Tutte climatizzate con bagno privato. Fino a 11 persone.",feat2_t:"Piscina Infinity",feat2_p:"Piscina riscaldata con vista panoramica sulla Provenza.",feat3_t:"Sala Cinema",feat3_p:"Grande sala cinema con divano lounge.",feat4_t:"Vista Panoramica",feat4_p:"Vista mozzafiato su borgo e Mediterraneo.",feat5_t:"Terrazza & Lounge",feat5_p:"Terrazze esterne, lounge coperto, BBQ.",feat6_t:"Posizione Ideale",feat6_p:"20 min Costa Azzurra, vicino a Vence e Antibes.",gal_label:"Galleria",gal_title:"Scopri la Villa",price_label:"Prezzi",price_title:"Tariffe 2026",price_intro:"Prezzi a settimana, pulizie finali incluse.",s_low:"Bassa Stagione",s_mid:"Media Stagione",s_high:"Alta Stagione",per_week:"a settimana",d_low:"Aprile–Maggio / Ott–Nov",d_mid:"Giugno / Settembre",d_high:"Luglio – Agosto",loc_label:"Posizione",loc_title:"Cuore della Provenza",l1h:"Costa Azzurra",l1p:"20 minuti dal Mediterraneo",l2h:"Arte & Cultura",l2p:"Vicino a Saint-Paul-de-Vence",l3h:"Aeroporto Nizza",l3p:"45 minuti da tutte le città europee",l4h:"Gastronomia",l4p:"Mercati, ristoranti e vigneti",map_txt:"📍 Provenza, Francia",bk_label:"Contatto",bk_title:"Richiedi Disponibilità",bk_text:"Risponderemo entro 24 ore.",f_name:"Nome",f_email:"Email",f_arr:"Arrivo",f_dep:"Partenza",f_guests:"Persone",f_src:"Come ci hai trovato?",f_msg:"Messaggio",f_send:"Invia Richiesta"},
+dk:{nav_about:"Villaen",nav_gallery:"Galleri",nav_pricing:"Priser",nav_book:"Book",hero_title:"Villa Provin",hero_sub:"Dit Private Luksusophold i Provence",hero_cta:"Book Nu",about_label:"Velkommen",about_title:"Et sted du aldrig glemmer",about_text:"Midt i Provence-bakkerne, med betagende udsigt over en middelalderlig landsby til Middelhavet — Villa Provin er en ekstraordinær ejendom.",about_text2:"5 dobbeltværelser, privat infinity-pool, biografrum og generøse udendørsarealer.",villa_label:"Faciliteter",villa_title:"Villaen",feat1_t:"5 Dobbeltværelser",feat1_p:"Alle klimaanlæg med badeværelse. Op til 11 personer.",feat2_t:"Infinity Pool",feat2_p:"Privat opvarmet pool med panoramaudsigt over Provence.",feat3_t:"Biografrum",feat3_p:"Stort biografrum med lounge-sofa.",feat4_t:"Panoramaudsigt",feat4_p:"Betagende udsigt over landsby og Middelhav.",feat5_t:"Terrasse & Lounge",feat5_p:"Udendørsterrasser, overdækket lounge, grill.",feat6_t:"Topbeliggenhed",feat6_p:"20 min til Côte d'Azur, nær Vence og Antibes.",gal_label:"Galleri",gal_title:"Oplev Villaen",price_label:"Priser",price_title:"Lejepriser 2026",price_intro:"Alle priser pr. uge inkl. slutrengøring.",s_low:"Lavsæson",s_mid:"Mellemsæson",s_high:"Højsæson",per_week:"pr. uge",d_low:"April–Maj / Okt–Nov",d_mid:"Juni / September",d_high:"Juli – August",loc_label:"Beliggenhed",loc_title:"Provence",l1h:"Côte d'Azur",l1p:"20 minutter til Middelhavet",l2h:"Kunst & Kultur",l2p:"Tæt på Saint-Paul-de-Vence",l3h:"Nice Lufthavn",l3p:"45 minutter fra alle europæiske byer",l4h:"Gastronomi",l4p:"Markeder, restauranter og vingårde",map_txt:"📍 Provence, Frankrig",bk_label:"Kontakt",bk_title:"Anmod om Tilgængelighed",bk_text:"Vi svarer inden for 24 timer.",f_name:"Navn",f_email:"Email",f_arr:"Ankomst",f_dep:"Afrejse",f_guests:"Gæster",f_src:"Hvordan fandt du os?",f_msg:"Besked",f_send:"Send Forespørgsel"}
+};
+
+let lang='de';
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(T[l]&&T[l][k])el.textContent=T[l][k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  const btn=document.querySelector('.lang-btn[onclick="setLang(\''+l+'\')"]');
+  if(btn)btn.classList.add('active');
+  document.documentElement.lang=l;
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+});
+
+function submitForm(e){
+  e.preventDefault();
+  const n=document.getElementById('fn').value;
+  const em=document.getElementById('fe').value;
+  const a=document.getElementById('fa').value;
+  const d=document.getElementById('fd').value;
+  const g=document.getElementById('fg').value;
+  const s=document.getElementById('fs').value;
+  const m=document.getElementById('fm').value;
+  const sub=`Villa Provin Anfrage — ${a} bis ${d}`;
+  const body=`Name: ${n}\nEmail: ${em}\nAnreise: ${a}\nAbreise: ${d}\nPersonen: ${g}\nGefunden via: ${s}\n\nNachricht:\n${m}`;
+  window.location.href=`mailto:stefan@villaprovin.com?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;
+}
+</script>
+</body>
+</html>
