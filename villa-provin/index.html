@@ -13,8 +13,11 @@ body{font-family:'Inter',sans-serif;color:var(--dark);background:#fff}
 nav{position:fixed;top:0;width:100%;z-index:100;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;transition:.3s;background:rgba(0,0,0,.2)}
 nav.scrolled{background:rgba(255,255,255,.97);box-shadow:0 2px 20px rgba(0,0,0,.1)}
 nav.scrolled .logo{color:var(--dark)}
+.logo img{height:40px;width:auto;transition:.3s;filter:brightness(0) invert(1)}
+nav.scrolled .logo img{filter:none}
+footer .logo img{filter:brightness(0) invert(1);height:50px}
 nav.scrolled .nav-links a{color:var(--mid)}
-.logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;text-decoration:none;letter-spacing:.05em}
+.logo{text-decoration:none;display:flex;align-items:center}
 .nav-links{display:flex;gap:30px;align-items:center}
 .nav-links a{color:rgba(255,255,255,.9);text-decoration:none;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;transition:.2s}
 .nav-links a:hover{color:var(--gold)}
@@ -103,7 +106,7 @@ footer a{color:var(--gold);text-decoration:none}
 <body>
 
 <nav id="nav">
-  <a href="#" class="logo">Villa Provin</a>
+  <a href="#" class="logo"><img src="logo.png" alt="Villa Provin"></a>
   <div class="nav-links">
     <a href="#about" data-i18n="nav_about">Die Villa</a>
     <a href="#gallery" data-i18n="nav_gallery">Galerie</a>
@@ -249,7 +252,7 @@ footer a{color:var(--gold);text-decoration:none}
 </section>
 
 <footer>
-  <a href="#" class="logo">Villa Provin</a>
+  <a href="#" class="logo"><img src="logo.png" alt="Villa Provin"></a>
   <p><a href="mailto:info@perfect-home.de">info@perfect-home.de</a> &nbsp;|&nbsp; <a href="tel:+33647150476">+33 6 47 15 04 76</a></p>
   <br>
   <p style="font-size:.8rem;opacity:.6">Villa Provin Team c/o Perfect Solutions SARL · 2 Rue Sainte-Claire · F-06300 Nice</p>
