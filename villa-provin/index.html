@@ -26,7 +26,11 @@ nav.scrolled .nav-links a{color:var(--mid)}
 .lang-btn.active,.lang-btn:hover{background:var(--gold);border-color:var(--gold);color:#fff}
 nav.scrolled .lang-btn{border-color:rgba(0,0,0,.2);color:var(--mid)}
 nav.scrolled .lang-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
-#hero{height:100vh;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),url("photos/DSC_6602.jpg") center/cover;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px;position:relative}
+#hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 20px;position:relative;overflow:hidden}
+#hero-video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;min-height:100%;width:auto;height:auto;z-index:0;object-fit:cover}
+#hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.38);z-index:1}
+#hero .hero-content{position:relative;z-index:2}
+#hero .scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2}
 .hero-content h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);color:#fff;font-weight:700;line-height:1.1;margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,.3)}
 .hero-content p{font-size:clamp(1rem,2vw,1.3rem);color:rgba(255,255,255,.85);margin-bottom:40px;letter-spacing:.05em;font-weight:300}
 .btn-primary{background:var(--gold);color:#fff;padding:16px 44px;border:none;border-radius:2px;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:.3s;font-family:'Inter',sans-serif}
@@ -123,6 +127,10 @@ footer a{color:var(--gold);text-decoration:none}
 </nav>
 
 <section id="hero">
+  <video id="hero-video" autoplay muted loop playsinline>
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div id="hero-overlay"></div>
   <div class="hero-content">
     <h1 data-i18n="hero_title">Villa Provin</h1>
     <p data-i18n="hero_sub">Ihr privates Luxus-Refugium in der Provence</p>
